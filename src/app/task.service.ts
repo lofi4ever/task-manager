@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { Task } from './task';
 import { TASKS } from './mock-tasks';
@@ -9,10 +11,24 @@ import { LogService } from './log.service';
 })
 export class TaskService {
 
-  constructor( private logService: LogService ) { }
+  private tasksPath = '/api/tasks';
 
-  getTasks(): Task[] {
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
+  constructor( 
+    private logService: LogService,
+    private http: HttpClient
+  ) { }
+
+  getTasks(): Observable<Task[]> {
     this.logService.add('getting tasks');
-    return TASKS;
+    return this.http.get<Task[]>(this.tasksPath);
+  }
+
+  addTask(task: Task): Observable<Task> {
+    this.logService.add('posting task');
+    return this.http.post<Task>(this.tasksPath, task, this.httpOptions);
   }
 }
