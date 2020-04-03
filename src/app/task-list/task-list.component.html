@@ -1,0 +1,8 @@
+<div class="task-list">
+  <div class="task" *ngFor="let task of tasks" [class.complete]="task.isComplete">
+    <div class="task-name">{{ task.name }}</div>
+    <div class="task-description" *ngIf="task.description">
+      {{ task.description }}
+    </div>
+  </div>
+</div>

@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "task-manager"
+    }
+  },
+  "defaultProject": "task-manager",
+  "cli": {
+    "analytics": "87dad166-0443-4b4d-b7f1-584bdb9fefc0"
+  }
 }

@@ -1,0 +1,7 @@
+<div class="messages-container">
+  <div class="message" *ngFor="let message of logService.messages">
+    {{ message }}
+  </div>
+</div> 
+
+<button (click)="logService.clear()">clear log</button>
