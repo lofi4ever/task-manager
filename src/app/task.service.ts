@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Task } from './task';
-import { TASKS } from './mock-tasks';
 import { LogService } from './log.service';
 
 @Injectable({
@@ -22,6 +21,11 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
+  getTask(id: number): Observable<Task> {
+    this.logService.add('getting task');
+    return this.http.get<Task>(`${this.tasksPath}/${id}`);
+  }
+
   getTasks(): Observable<Task[]> {
     this.logService.add('getting tasks');
     return this.http.get<Task[]>(this.tasksPath);
@@ -29,6 +33,14 @@ export class TaskService {
 
   addTask(task: Task): Observable<Task> {
     this.logService.add('posting task');
-    return this.http.post<Task>(this.tasksPath, task, this.httpOptions);
+    return this.http.post<Task>(this.tasksPath, JSON.stringify(task), this.httpOptions);
+  }
+
+  deleteTask(taskId: number): Observable<Task> {
+    return this.http.delete<Task>(`${this.tasksPath}/${taskId}`);
+  }
+
+  deleteAll(): Observable<any> {
+    return this.http.delete(this.tasksPath);
   }
 }

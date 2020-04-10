@@ -1,8 +1,20 @@
-<div class="task-list">
-  <div class="task" *ngFor="let task of tasks" [class.complete]="task.isComplete">
-    <div class="task-name">{{ task.name }}</div>
-    <div class="task-description" *ngIf="task.description">
-      {{ task.description }}
+<ng-container *ngIf="tasks.length else noTasks">
+  <div class="task-list">
+    <div class="task" *ngFor="let task of tasks" [class.complete]="task.isComplete">
+      <div class="task-name">{{ task.name }}</div>
+      <div class="task-description" *ngIf="task.description">
+        {{ task.description }}
+      </div>
+      <a routerLink="/task-list/{{task.id}}">view detail</a>
+      <button (click)="deleteTask(task.id)">delete</button>
     </div>
   </div>
-</div>
+
+  <button (click)="deleteAll()">delete all</button>
+</ng-container>
+
+<ng-template #noTasks>
+  Task list is empty
+</ng-template>
+
+<app-add-task (add)="addTask($event)"></app-add-task>

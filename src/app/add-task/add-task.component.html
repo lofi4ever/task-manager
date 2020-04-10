@@ -8,7 +8,7 @@
   description: {{ model.description }}
 </div>
 
-<form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+<form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
   <div class="form-control">
     <label for="name">Name:</label>
     <input type="text" 

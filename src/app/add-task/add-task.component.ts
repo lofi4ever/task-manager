@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 
 
 class TaskModel {
@@ -18,11 +18,14 @@ export class AddTaskComponent implements OnInit {
 
   model = new TaskModel();
 
+  @Output() add = new EventEmitter();
+
   constructor() { }
 
-  onSubmit() {
-    alert('form was submited');
+  onSubmit(form) {
+    this.add.emit(this.model);
     this.model = new TaskModel();
+    form.reset();
   }
 
   ngOnInit(): void {

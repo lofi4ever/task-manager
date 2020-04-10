@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { LogInfoComponent } from './log-info/log-info.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { TaskDetailComponent } from './task-detail/task-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TaskListComponent,
     LogInfoComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    TaskDetailComponent
   ],
   imports: [
     BrowserModule,
