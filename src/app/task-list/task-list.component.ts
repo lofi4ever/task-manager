@@ -9,7 +9,16 @@ import { Task } from '../task';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  tasks: Task[] = []
+  tasks: Task[] = [];
+
+  completionFilter = false;
+  completionFilterOptions = [
+    { name: 'Not complete', value: false },
+    { name: 'Complete', value: true },
+    { name: 'All', value: null }
+  ];
+
+  searchString = '';
 
   constructor( private taskService: TaskService ) { }
 
@@ -25,9 +34,11 @@ export class TaskListComponent implements OnInit {
   deleteTask(taskId: number): void {
     this.taskService.deleteTask(taskId)
       .subscribe(result => {
-        this.tasks.splice(
-          this.tasks.map(el => el.id).indexOf(result.id), 1
+        var removedPosition = this.tasks.map(el => el.id).indexOf(result.id);
+        var newTasks = this.tasks.slice(0, removedPosition).concat(
+          this.tasks.slice(removedPosition + 1)
         );
+        this.tasks = newTasks;
       });
   }
 
@@ -44,7 +55,9 @@ export class TaskListComponent implements OnInit {
     this.taskService.addTask(task)
       .subscribe(result => {
         console.log(result);
-        this.tasks.push(result);
+        var newTasks = this.tasks.slice();
+        newTasks.push(result);
+        this.tasks = newTasks;
       });
   }
 

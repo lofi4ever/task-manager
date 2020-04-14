@@ -1,6 +1,18 @@
+<input type="text" [(ngModel)]="searchString">
+
+<div class="btn-group">
+  filter:
+  <button *ngFor="let option of completionFilterOptions"
+    (click)="completionFilter = option.value"
+    [class.active]="completionFilter === option.value">
+    {{ option.name }}
+  </button>
+</div>
+
 <ng-container *ngIf="tasks.length else noTasks">
   <div class="task-list">
-    <div class="task" *ngFor="let task of tasks" [class.complete]="task.isComplete">
+    <div class="task" 
+    *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString" [class.complete]="task.isComplete">
       <div class="task-name">{{ task.name }}</div>
       <div class="task-description" *ngIf="task.description">
         {{ task.description }}

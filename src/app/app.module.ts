@@ -9,6 +9,8 @@ import { TaskListComponent } from './task-list/task-list.component';
 import { LogInfoComponent } from './log-info/log-info.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
+import { PropFilterPipe } from './prop-filter.pipe';
+import { SearchByPropPipe } from './search-by-prop.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { TaskDetailComponent } from './task-detail/task-detail.component';
     TaskListComponent,
     LogInfoComponent,
     AddTaskComponent,
-    TaskDetailComponent
+    TaskDetailComponent,
+    PropFilterPipe,
+    SearchByPropPipe
   ],
   imports: [
     BrowserModule,
