@@ -1,8 +1,12 @@
+@import '~bootstrap/dist/css/bootstrap.css';
+
+@import 'assets/styles/common';
+
 html, body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'SegoeUI', sans-serif;
   font-size: 16px;
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Montserrat', sans-serif; 
+  font-family: 'SegoeUI', sans-serif; 
 }

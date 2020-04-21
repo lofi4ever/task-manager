@@ -1,32 +1,34 @@
-<input type="text" [(ngModel)]="searchString">
+<div class="container-fluid">
+  <input type="text" [(ngModel)]="searchString">
 
-<div class="btn-group">
-  filter:
-  <button *ngFor="let option of completionFilterOptions"
-    (click)="completionFilter = option.value"
-    [class.active]="completionFilter === option.value">
-    {{ option.name }}
-  </button>
-</div>
-
-<ng-container *ngIf="tasks.length else noTasks">
-  <div class="task-list">
-    <div class="task" 
-    *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString" [class.complete]="task.isComplete">
-      <div class="task-name">{{ task.name }}</div>
-      <div class="task-description" *ngIf="task.description">
-        {{ task.description }}
-      </div>
-      <a routerLink="/task-list/{{task.id}}">view detail</a>
-      <button (click)="deleteTask(task.id)">delete</button>
-    </div>
+  <div class="btn-group">
+    filter:
+    <button *ngFor="let option of completionFilterOptions"
+      (click)="completionFilter = option.value"
+      [class.active]="completionFilter === option.value">
+      {{ option.name }}
+    </button>
   </div>
 
-  <button (click)="deleteAll()">delete all</button>
-</ng-container>
+  <ng-container *ngIf="tasks.length else noTasks">
+    <div class="task-list">
+      <div class="task" 
+      *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString" [class.complete]="task.isComplete">
+        <div class="task-name">{{ task.name }}</div>
+        <div class="task-description" *ngIf="task.description">
+          {{ task.description }}
+        </div>
+        <a routerLink="/task-list/{{task.id}}">view detail</a>
+        <button (click)="deleteTask(task.id)">delete</button>
+      </div>
+    </div>
 
-<ng-template #noTasks>
-  Task list is empty
-</ng-template>
+    <button (click)="deleteAll()">delete all</button>
+  </ng-container>
 
-<app-add-task (add)="addTask($event)"></app-add-task>
+  <ng-template #noTasks>
+    Task list is empty
+  </ng-template>
+
+  <app-add-task (add)="addTask($event)"></app-add-task>
+</div>
