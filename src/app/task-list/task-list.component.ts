@@ -9,6 +9,8 @@ import { Task } from '../task';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
+  pageTitle = 'Task list';
+
   tasks: Task[] = [];
 
   completionFilter = false;

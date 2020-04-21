@@ -1,0 +1,50 @@
+.page-content {
+  padding-top: 26px;
+}
+
+.page-header {
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-size: 74px;
+  line-height: 92px;
+  font-weight: 400;
+  color: $text-color;
+}
+
+.link-action {
+  font-size: 28px;
+  line-height: 46px;
+  color: $text-color;
+  text-decoration: none;
+  border: none;
+  padding: 0;
+  background: transparent;
+  outline: none!important;
+  &:hover, &:focus, &:active {
+    color: $accent-color;
+    text-decoration: none;
+    opacity: 1;
+  }
+  opacity: .58;
+  &.active {
+    opacity: 1;
+  }
+}
+
+.page-actions {
+  .link-action {
+    &:not(:first-child) {
+      margin-left: 34px;
+    }
+  }
+}
+
+.link-filter-group {
+  .link-action {
+    &:not(:first-child) {
+      margin-left: 34px;
+    }
+  }
+}

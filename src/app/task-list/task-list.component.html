@@ -1,34 +1,62 @@
-<div class="container-fluid">
-  <input type="text" [(ngModel)]="searchString">
+<div class="page-content">
+  <div class="container">
 
-  <div class="btn-group">
-    filter:
-    <button *ngFor="let option of completionFilterOptions"
-      (click)="completionFilter = option.value"
-      [class.active]="completionFilter === option.value">
-      {{ option.name }}
-    </button>
-  </div>
-
-  <ng-container *ngIf="tasks.length else noTasks">
-    <div class="task-list">
-      <div class="task" 
-      *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString" [class.complete]="task.isComplete">
-        <div class="task-name">{{ task.name }}</div>
-        <div class="task-description" *ngIf="task.description">
-          {{ task.description }}
+    <div class="row align-items-baseline page-header">
+      <div class="col-8">
+        <h1 class="page-title">{{ pageTitle }}</h1>
+      </div>
+      <div class="col-4">
+        <div class="page-actions text-right">
+          <a href="#" class="link-action">add</a>
+          <a href="#" class="link-action">clear</a>
         </div>
-        <a routerLink="/task-list/{{task.id}}">view detail</a>
-        <button (click)="deleteTask(task.id)">delete</button>
       </div>
     </div>
 
-    <button (click)="deleteAll()">delete all</button>
-  </ng-container>
+    <div class="row align-items-center">
+      <div class="col-4">
+        <input type="text" [(ngModel)]="searchString" class="form-control" placeholder="search">
+      </div>
+      <div class="col-8">
+        <div class="link-filter-group text-right">
+          <button *ngFor="let option of completionFilterOptions"
+            (click)="completionFilter = option.value"
+            class="link-action"
+            [class.active]="completionFilter === option.value">
+            {{ option.name }}
+          </button>
+        </div>
+      </div>
+    </div>
 
-  <ng-template #noTasks>
-    Task list is empty
-  </ng-template>
+    <ng-container *ngIf="tasks.length else noTasks">
+      <div class="row task-list" data-title="{{ pageTitle }}">
+        <div class="col-6 task-wrapper" *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString" [class.complete]="task.isComplete">
+          <a routerLink="/task-list/{{task.id}}" class="task" [class.complete]="task.isComplete">
+            <div class="task__side">
+              <div class="tasc__side-content">
+                <div class="task-name">{{ task.name }}</div>
+              </div>
+            </div>
+            <div class="task__side" style="background-image: url(assets/tasks/1.jpg)">
+              <div class="task-description" *ngIf="task.description">
+                {{ task.description }}
+              </div>
+            </div>
+            <div class="d-none">
+              <button (click)="deleteTask(task.id)">delete</button>
+            </div>
+          </a>
+        </div>
+      </div>
 
-  <app-add-task (add)="addTask($event)"></app-add-task>
+      <button (click)="deleteAll()">delete all</button>
+    </ng-container>
+
+    <ng-template #noTasks>
+      Task list is empty
+    </ng-template>
+
+    <app-add-task (add)="addTask($event)"></app-add-task>
+  </div>
 </div>

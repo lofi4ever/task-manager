@@ -1,14 +1,69 @@
+.task-list {
+  margin-top: 38px;
+  position: relative;
+  &:before {
+    content: attr(title);
+    position: absolute;
+    font-size: 135px;
+    color: #707070;
+    opacity: .1;
+    transform: rotate(90deg) translateX(-100%);
+    left: 0;
+    top: 0;
+  }
+}
+
+.task-wrapper {
+  margin-bottom: 30px;
+}
+
 .task {
+  $a: &;
+  background-color: #0685fa;
+  color: #fff;
   margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid gray;
+  height: 100%;
+  margin-bottom: 30px;
+  min-height: 245px;
+  display: block;
   &-name {
     font-family: 'SegoeUI', sans-serif; 
-    font-size: 24px;
+    font-size: 40px;
+    line-height: 45px;
   }
   &-description {
-    display: 16px;
+    font-size: 28px;
     margin-top: 8px;
+  }
+
+  &__side {
+    height: 100%;
+    padding: 30px;
+    display: none;
+    align-items: flex-end;
+    &:nth-child(2) {
+      background-color: #D810FE;
+    }
+  }
+
+  &:not(:hover) {
+    #{$a}__side {
+      &:nth-child(1) {
+        display: flex;
+      }
+    }
+  }
+
+  &:hover {
+    #{$a}__side {
+      &:nth-child(2) {
+        display: flex;
+      }
+    }
+  }
+
+  &:hover, &:focus, &:active {
+    text-decoration: none;
   }
 
   //states
