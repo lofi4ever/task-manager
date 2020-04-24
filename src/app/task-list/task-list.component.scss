@@ -1,16 +1,5 @@
 .task-list {
   margin-top: 38px;
-  position: relative;
-  &:before {
-    content: attr(title);
-    position: absolute;
-    font-size: 135px;
-    color: #707070;
-    opacity: .1;
-    transform: rotate(90deg) translateX(-100%);
-    left: 0;
-    top: 0;
-  }
 }
 
 .task-wrapper {

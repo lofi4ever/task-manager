@@ -1,5 +1,5 @@
-<div class="page-content">
-  <div class="container">
+<div class="page">
+  <div class="container page-container" data-title="{{ pageTitle }}">
 
     <div class="row align-items-baseline page-header">
       <div class="col-8">
@@ -7,8 +7,8 @@
       </div>
       <div class="col-4">
         <div class="page-actions text-right">
-          <a href="#" class="link-action">add</a>
-          <a href="#" class="link-action">clear</a>
+          <button class="link-action">add</button>
+          <button class="link-action" (click)="deleteAll()">clear</button>
         </div>
       </div>
     </div>
@@ -30,7 +30,7 @@
     </div>
 
     <ng-container *ngIf="tasks.length else noTasks">
-      <div class="row task-list" data-title="{{ pageTitle }}">
+      <div class="row task-list">
         <div class="col-6 task-wrapper" *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString" [class.complete]="task.isComplete">
           <a routerLink="/task-list/{{task.id}}" class="task" [class.complete]="task.isComplete">
             <div class="task__side">
@@ -50,7 +50,6 @@
         </div>
       </div>
 
-      <button (click)="deleteAll()">delete all</button>
     </ng-container>
 
     <ng-template #noTasks>

@@ -1,17 +1,10 @@
 <h2>Add new task</h2>
 
-<div class="">
-  diagnostics:
-  <br>
-  name: {{ model.name }}
-  <br>
-  description: {{ model.description }}
-</div>
-
 <form (ngSubmit)="onSubmit(taskForm)" #taskForm="ngForm">
-  <div class="form-control">
+  <div class="form-group">
     <label for="name">Name:</label>
     <input type="text" 
+      class="form-control"
       #controlName="ngModel"
       name="name" 
       id="name"
@@ -21,18 +14,20 @@
         Task name is required
       </div>
   </div>
-  <div class="form-control">
+  <div class="form-group">
     <label for="name">Description:</label>
     <textarea name="description" 
+      class="form-control"
       id="description"
       [(ngModel)]="model.description"></textarea>
   </div>
-  <div class="form-control">
-    <label for="is-complete">Is task complete</label>
+  <div class="form-group">
     <input type="checkbox" 
+      class="form-check"
       name="isComplete" 
       id="isComplete"
       [(ngModel)]="model.isComplete">
+    <label for="is-complete">Is task complete</label>
   </div>
   <input type="submit" [disabled]="!taskForm.form.valid" value="add">
 </form>

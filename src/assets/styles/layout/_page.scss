@@ -1,5 +1,21 @@
-.page-content {
+.page {
   padding-top: 26px;
+}
+
+.page-container {
+  position: relative;
+  &:before {
+    content: attr(title);
+    position: absolute;
+    font-size: 135px;
+    color: #707070;
+    opacity: .1;
+    left: 0;
+    top: 200px;
+    line-height: 150px;
+    transform-origin: left top;
+    transform: rotate(-90deg) translate(-100%, -100%);
+  }
 }
 
 .page-header {
