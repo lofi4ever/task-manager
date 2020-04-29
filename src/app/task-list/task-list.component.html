@@ -31,7 +31,7 @@
 
     <ng-container *ngIf="tasks.length else noTasks">
       <div class="row task-list">
-        <div class="col-6 task-wrapper" *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString" [class.complete]="task.isComplete">
+        <div class="col-6 task-wrapper" *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString">
           <a routerLink="/task-list/{{task.id}}" class="task" [class.complete]="task.isComplete">
             <div class="task__side">
               <div class="tasc__side-content">

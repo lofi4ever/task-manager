@@ -44,8 +44,8 @@ export class TaskListComponent implements OnInit {
   deleteTask(taskId: number): void {
     this.taskService.deleteTask(taskId)
       .subscribe(result => {
-        var removedPosition = this.tasks.map(el => el.id).indexOf(result.id);
-        var newTasks = this.tasks.slice(0, removedPosition).concat(
+        let removedPosition = this.tasks.map(el => el.id).indexOf(result.id);
+        let newTasks = this.tasks.slice(0, removedPosition).concat(
           this.tasks.slice(removedPosition + 1)
         );
         this.tasks = newTasks;
@@ -64,7 +64,7 @@ export class TaskListComponent implements OnInit {
   addTask(task: Task): void {
     this.taskService.addTask(task)
       .subscribe(result => {
-        var newTasks = this.tasks.slice();
+        let newTasks = this.tasks.slice();
         newTasks.push(result);
         this.tasks = newTasks;
         this.addTaskComponentInstance.reset();
