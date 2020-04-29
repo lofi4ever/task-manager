@@ -1,6 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
-
 class TaskModel {
   constructor(
     public name: string = '',
@@ -15,7 +14,7 @@ class TaskModel {
   styleUrls: ['./add-task.component.scss']
 })
 export class AddTaskComponent implements OnInit {
-  @ViewChild('taskForm') taskForm: ElementRef;
+  @ViewChild('taskForm') taskForm;
 
   model = new TaskModel();
 
@@ -23,16 +22,14 @@ export class AddTaskComponent implements OnInit {
 
   constructor() { }
 
-  onSubmit(form) {
+  onSubmit() {
     this.add.emit(this.model);
-    //this.model = new TaskModel();
-    //form.reset();
   }
 
   reset() {
-    //this.model = new TaskModel();
-    //this.taskForm.nativeElement.reset()
-    console.log('form should be reset');
+    this.model = new TaskModel();
+    console.log(this.taskForm);
+    this.taskForm.reset();
   }
 
   ngOnInit(): void {

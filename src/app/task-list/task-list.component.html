@@ -7,7 +7,7 @@
       </div>
       <div class="col-4">
         <div class="page-actions text-right">
-          <button class="link-action" (click)="openAddTaskModal(addTaskModal)">add</button>
+          <button class="link-action" (click)="openAddTaskModal()">add</button>
           <button class="link-action" (click)="deleteAll()">clear</button>
         </div>
       </div>
@@ -58,15 +58,3 @@
 
   </div>
 </div>
-
-<app-add-task (add)="addTask($event)"></app-add-task>
-
-<ng-template #addTaskModal let-modal>
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <app-add-task (add)="addTask($event)"></app-add-task>
-      </div>
-    </div> 
-  </div>
-</ng-template>

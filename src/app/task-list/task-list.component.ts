@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -13,8 +13,6 @@ import { AddTaskComponent } from '../add-task/add-task.component';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
-  @ViewChild(AddTaskComponent)
-  private test: AddTaskComponent;
 
   pageTitle = 'Task list';
 
@@ -59,24 +57,27 @@ export class TaskListComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
         this.tasks.length = 0;
-      })
-  }
-
-  addTask(task: Task): void {
-    console.log(task);
-    this.taskService.addTask(task)
-      .subscribe(result => {
-        console.log(result);
-        var newTasks = this.tasks.slice();
-        newTasks.push(result);
-        this.tasks = newTasks;
-        console.log(this.test);
-        this.test.reset();
       });
   }
 
-  openAddTaskModal(modal: TemplateRef<any>) {
-    this.modalService.open(modal); 
+  private addTaskComponentInstance;
+  addTask(task: Task): void {
+    this.taskService.addTask(task)
+      .subscribe(result => {
+        var newTasks = this.tasks.slice();
+        newTasks.push(result);
+        this.tasks = newTasks;
+        this.addTaskComponentInstance.reset();
+      });
+  }
+
+  openAddTaskModal() {
+    let modalRef = this.modalService.open(AddTaskComponent),
+        instance = modalRef.componentInstance;
+      instance.add.subscribe((task) => {
+      this.addTask(task);
+    });
+    this.addTaskComponentInstance = instance;
   }
 
 }
