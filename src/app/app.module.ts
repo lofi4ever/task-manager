@@ -11,6 +11,7 @@ import { AddTaskComponent } from './add-task/add-task.component';
 import { TaskDetailComponent } from './task-detail/task-detail.component';
 import { PropFilterPipe } from './prop-filter.pipe';
 import { SearchByPropPipe } from './search-by-prop.pipe';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SearchByPropPipe } from './search-by-prop.pipe';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { TaskService } from '../task.service';
 import { Task } from '../task';
+
+import { AddTaskComponent } from '../add-task/add-task.component';
 
 @Component({
   selector: 'app-task-list',
@@ -9,6 +13,9 @@ import { Task } from '../task';
   styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent implements OnInit {
+  @ViewChild(AddTaskComponent)
+  private test: AddTaskComponent;
+
   pageTitle = 'Task list';
 
   tasks: Task[] = [];
@@ -22,7 +29,10 @@ export class TaskListComponent implements OnInit {
 
   searchString = '';
 
-  constructor( private taskService: TaskService ) { }
+  constructor( 
+    private taskService: TaskService,
+    private modalService: NgbModal
+  ) { }
 
   ngOnInit(): void {
     this.getTasks();
@@ -60,7 +70,13 @@ export class TaskListComponent implements OnInit {
         var newTasks = this.tasks.slice();
         newTasks.push(result);
         this.tasks = newTasks;
+        console.log(this.test);
+        this.test.reset();
       });
+  }
+
+  openAddTaskModal(modal: TemplateRef<any>) {
+    this.modalService.open(modal); 
   }
 
 }

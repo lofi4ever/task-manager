@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 
 
 class TaskModel {
@@ -15,6 +15,7 @@ class TaskModel {
   styleUrls: ['./add-task.component.scss']
 })
 export class AddTaskComponent implements OnInit {
+  @ViewChild('taskForm') taskForm: ElementRef;
 
   model = new TaskModel();
 
@@ -24,8 +25,14 @@ export class AddTaskComponent implements OnInit {
 
   onSubmit(form) {
     this.add.emit(this.model);
-    this.model = new TaskModel();
-    form.reset();
+    //this.model = new TaskModel();
+    //form.reset();
+  }
+
+  reset() {
+    //this.model = new TaskModel();
+    //this.taskForm.nativeElement.reset()
+    console.log('form should be reset');
   }
 
   ngOnInit(): void {
