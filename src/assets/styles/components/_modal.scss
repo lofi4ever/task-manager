@@ -1,0 +1,11 @@
+div.modal-dialog {
+  max-width: 1000px;
+  height: calc(100% - 28px);
+}
+
+div.modal-content {
+  height: 100%;
+  border: 0;
+  padding: 32px;
+  border-radius: 0;
+}

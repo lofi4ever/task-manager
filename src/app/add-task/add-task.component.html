@@ -1,37 +1,33 @@
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <h2>Add new task</h2>
+<h2>Add new task</h2>
 
-      <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
-        <div class="form-group">
-          <label for="name">Name:</label>
-          <input type="text" 
-            class="form-control"
-            #controlName="ngModel"
-            name="name" 
-            id="name"
-            required
-            [(ngModel)]="model.name">
-            <div [hidden]="controlName.valid || controlName.pristine" class="alert alert-danger">
-              Task name is required
-            </div>
-        </div>
-        <div class="form-group">
-          <label for="name">Description:</label>
-          <textarea name="description" 
-            class="form-control"
-            id="description"
-            [(ngModel)]="model.description"></textarea>
-        </div>
-        <div class="form-group">
-          <input type="checkbox" 
-            class="form-check"
-            name="isComplete" 
-            id="isComplete"
-            [(ngModel)]="model.isComplete">
-          <label for="is-complete">Is task complete</label>
-        </div>
-        <input type="submit" [disabled]="!taskForm.form.valid" value="add">
-      </form>
-    </div>
-</div>
+<form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <input type="text" 
+      class="form-control"
+      #controlName="ngModel"
+      name="name" 
+      id="name"
+      required
+      [(ngModel)]="model.name">
+      <div [hidden]="controlName.valid || controlName.pristine" class="alert alert-danger">
+        Task name is required
+      </div>
+  </div>
+  <div class="form-group">
+    <label for="name">Description:</label>
+    <textarea name="description" 
+      class="form-control"
+      id="description"
+      [(ngModel)]="model.description"></textarea>
+  </div>
+  <div class="form-group">
+    <input type="checkbox" 
+      class="form-check"
+      name="isComplete" 
+      id="isComplete"
+      [(ngModel)]="model.isComplete">
+    <label for="is-complete">Is task complete</label>
+  </div>
+  <input type="submit" [disabled]="!taskForm.form.valid" value="add">
+</form>

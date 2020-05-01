@@ -1,3 +1,5 @@
+@import '../../assets/styles/abstract/variables';
+
 .task-list {
   margin-top: 38px;
 }
@@ -8,7 +10,7 @@
 
 .task {
   $a: &;
-  background-color: #0685fa;
+  background-color: $accent-color;
   color: #fff;
   margin-bottom: 20px;
   height: 100%;
@@ -16,12 +18,12 @@
   min-height: 245px;
   display: block;
   &-name {
-    font-family: 'SegoeUI', sans-serif; 
+    font-family: $default-font-family;
     font-size: 40px;
     line-height: 45px;
   }
   &-description {
-    font-size: 28px;
+    font-size: 18px;
     margin-top: 8px;
   }
 
@@ -30,9 +32,29 @@
     padding: 30px;
     display: none;
     align-items: flex-end;
+    background-size: cover;
+    background-position: center;
     &:nth-child(2) {
-      background-color: #D810FE;
+      background-color: $secondary-color;
     }
+    &--has-bg {
+      position: relative;
+      &:before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background-color: rgba(0,0,0,.45);
+      }
+    }
+  }
+
+  &__side-content {
+    position: relative;
+    z-index: 1;
   }
 
   &:not(:hover) {
