@@ -41,6 +41,54 @@ export class TaskListComponent implements OnInit {
       .subscribe(tasks => this.tasks = tasks);
   }
 
+  private addTaskComponentInstance;
+
+  openAddTaskModal() {
+    let modalRef = this.modalService.open(AddTaskComponent),
+        instance = modalRef.componentInstance;
+      instance.mode = 'add';
+      instance.added.subscribe((task) => {
+        this.addTask(task);
+      });
+      this.addTaskComponentInstance = instance;
+  }
+
+  openEditTaskModal(task) {
+    let modalRef = this.modalService.open(AddTaskComponent),
+        instance = modalRef.componentInstance;
+    instance.mode = 'edit';
+    instance.model = task;
+    instance.edited.subscribe((task) => {
+      this.editTask(task);
+    });
+    this.addTaskComponentInstance = instance;
+  }
+
+  addTask(task: Task): void {
+    this.taskService.addTask(task)
+      .subscribe(result => {
+        let newTasks = this.tasks.slice();
+        newTasks.push(result);
+        this.tasks = newTasks;
+        this.addTaskComponentInstance.reset();
+      });
+  }
+
+  editTask(task: Task): void {
+    this.taskService.editTask(task)
+      .subscribe(result => {
+        console.log(result);
+        let taskPosition = this.tasks.map(el => el.id).indexOf(task.id);
+        let newTasks = this.tasks.slice(0, taskPosition);
+        newTasks.push(task);
+        newTasks = newTasks.concat(
+          this.tasks.slice(taskPosition + 1)
+        );
+        this.tasks = newTasks;
+        this.addTaskComponentInstance.reset();
+      })
+  }
+
   deleteTask(taskId: number): void {
     this.taskService.deleteTask(taskId)
       .subscribe(result => {
@@ -58,26 +106,6 @@ export class TaskListComponent implements OnInit {
         console.log(result);
         this.tasks.length = 0;
       });
-  }
-
-  private addTaskComponentInstance;
-  addTask(task: Task): void {
-    this.taskService.addTask(task)
-      .subscribe(result => {
-        let newTasks = this.tasks.slice();
-        newTasks.push(result);
-        this.tasks = newTasks;
-        this.addTaskComponentInstance.reset();
-      });
-  }
-
-  openAddTaskModal() {
-    let modalRef = this.modalService.open(AddTaskComponent),
-        instance = modalRef.componentInstance;
-      instance.add.subscribe((task) => {
-      this.addTask(task);
-    });
-    this.addTaskComponentInstance = instance;
   }
 
 }

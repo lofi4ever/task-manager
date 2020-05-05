@@ -46,6 +46,17 @@ const addTask = (req, res) => {
     })
 }
 
+const updateTask = (req, res) => {
+  let {id} = req.body;
+  Task.updateOne({id}, req.body)
+    .then(result => {
+      res.status(200).json(result);
+    })
+    .catch(err => {
+      res.sendStatus(500);
+    })
+}
+
 const deleteAll = (req, res) => {
   Task.deleteMany({})
     .then(() => {
@@ -69,6 +80,7 @@ const deleteTask = (req, res) => {
 
 router.get('/', getTasks);
 router.post('/', jsonParser, addTask);
+router.put('/', jsonParser, updateTask);
 router.delete('/', deleteAll);
 router.get('/:id', getTask);
 router.delete('/:id', deleteTask);

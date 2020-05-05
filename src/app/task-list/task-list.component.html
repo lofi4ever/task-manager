@@ -2,10 +2,10 @@
   <div class="container page-container" data-title="{{ pageTitle }}">
 
     <div class="row align-items-baseline page-header">
-      <div class="col-8">
+      <div class="col-md-8">
         <h1 class="page-title">{{ pageTitle }}</h1>
       </div>
-      <div class="col-4">
+      <div class="col-md-4">
         <div class="page-actions text-right">
           <button class="link-action" (click)="openAddTaskModal()">add</button>
           <button class="link-action" (click)="deleteAll()">clear</button>
@@ -14,10 +14,10 @@
     </div>
 
     <div class="row align-items-center">
-      <div class="col-4">
+      <div class="col-md-4">
         <input type="text" [(ngModel)]="searchString" class="form-control" placeholder="search">
       </div>
-      <div class="col-8">
+      <div class="col-md-8">
         <div class="link-filter-group text-right">
           <button *ngFor="let option of completionFilterOptions"
             (click)="completionFilter = option.value"
@@ -31,24 +31,41 @@
 
     <ng-container *ngIf="tasks.length else noTasks">
       <div class="row task-list">
-        <div class="col-6 task-wrapper" *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString">
-          <a routerLink="/task-list/{{task.id}}" class="task" [class.complete]="task.isComplete">
-            <div class="task__side task__side--has-bg" style="background-image: url(/assets/images/tasks/2.jpg)">
-              <div class="task__side-content">
-                <div class="task-name">{{ task.name }}</div>
-              </div>
+        <div class="col-md-6 task-wrapper" *ngFor="let task of tasks | propFilter: 'isComplete': completionFilter | searchByProp: 'name': searchString">
+          <div class="task" [class.complete]="task.isComplete">
+            <div class="task__controls">
+              <button class="task-control" (click)="openEditTaskModal(task)">
+                <svg class="ico" width="22" height="22">
+                  <use href="/assets/images/ui/sprite.svg#ico-edit"></use>
+                </svg>
+              </button>
+              <button class="task-control task-control--remove" (click)="deleteTask(task.id)">
+                <svg class="ico" width="22" height="22">
+                  <use href="/assets/images/ui/sprite.svg#ico-close"></use>
+                </svg>
+              </button>
             </div>
-            <div class="task__side">
-              <div class="task__side-content">
-                <div class="task-description" *ngIf="task.description">
-                  {{ task.description }}
+            <div class="task__sides">
+              <div class="task__side task__side--has-bg" style="background-image: url(/assets/images/tasks/2.jpg)">
+                <div class="task__side-content">
+                  <div class="task-name">{{ task.name }}</div>
+                </div>
+              </div>
+              <div class="task__side">
+                <div class="task__side-content">
+                  <div class="task-description" *ngIf="task.description else noDescr">
+                    {{ task.description }}
+                  </div>
+                  <a routerLink="/task-list/{{task.id}}" class="task-to-detail">
+                    <span>View details</span>
+                    <svg class="ico" width="22" height="22">
+                      <use href="/assets/images/ui/sprite.svg#ico-arrow-right"></use>
+                    </svg>
+                  </a>
                 </div>
               </div>
             </div>
-            <div class="d-none">
-              <button (click)="deleteTask(task.id)">delete</button>
-            </div>
-          </a>
+          </div>
         </div>
       </div>
 
@@ -56,6 +73,10 @@
 
     <ng-template #noTasks>
       Task list is empty
+    </ng-template>
+
+    <ng-template #noDescr>
+      No description
     </ng-template>
 
   </div>

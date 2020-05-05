@@ -36,6 +36,10 @@ export class TaskService {
     return this.http.post<Task>(this.tasksPath, JSON.stringify(task), this.httpOptions);
   }
 
+  editTask(task: Task): Observable<Task> {
+    return this.http.put<Task>(this.tasksPath, JSON.stringify(task), this.httpOptions);
+  }
+
   deleteTask(taskId: number): Observable<Task> {
     return this.http.delete<Task>(`${this.tasksPath}/${taskId}`);
   }

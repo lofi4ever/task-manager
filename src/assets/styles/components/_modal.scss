@@ -1,5 +1,5 @@
 div.modal-dialog {
-  max-width: 1000px;
+  max-width: 824px;
   height: calc(100% - 28px);
 }
 
@@ -8,4 +8,29 @@ div.modal-content {
   border: 0;
   padding: 32px;
   border-radius: 0;
+}
+
+.modal-outer {
+  position: relative;
+}
+
+div.modal-body {
+  padding: 0;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+
+  background-color: transparent;
+  border: none;
+}
+
+.modal-title {
+  color: #707070;
+  font-size: 50px;
+  transform: translate(-35px, -15px);
+  opacity: 0.3;
 }
