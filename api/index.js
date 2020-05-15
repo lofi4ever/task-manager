@@ -13,7 +13,7 @@ const handler = express();
 
 handler
   .use(jwt())
-  .use(function(req, res, next) { ///middleware test
+  .use(function(req, res, next) { ///middleware
     //console.log('logger');
     next();
   })
