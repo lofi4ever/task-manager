@@ -48,9 +48,9 @@ async function create(params) {
 
 async function update(id, params) {
   const user = await User.findById(id);
-  if(!user) throw new 'User not found';
-  if(params.username && await User.find({ username: params.username })) {
-    throw new `Username "${params.name}" is already taken`;
+  if(!user) throw 'User not found';
+  if(params.username !== user.username && await User.findOne({ username: params.username })) {
+    throw `Username ${ params.username } is already taken`;
   }
 
   if(params.password) {

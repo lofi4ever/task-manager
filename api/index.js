@@ -13,8 +13,8 @@ const handler = express();
 
 handler
   .use(jwt())
-  .use(function(req, res, next) {
-    console.log('logger');
+  .use(function(req, res, next) { ///middleware test
+    //console.log('logger');
     next();
   })
   .use('/api/tasks', tasksRouter)
